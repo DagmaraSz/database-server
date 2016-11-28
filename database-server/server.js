@@ -1,15 +1,15 @@
 var express = require('express');
 var server = express();
 
-var storage = new Storage();
+var storage = require("./storage").Storage;
 
 server.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
 server.get('/set', function (req, res) {
-  params = req.query;
-  res.send('Your set: ' + JSON.stringify(req.query));
+  storage.params = req.query;
+  res.send('You set: ' + JSON.stringify(storage.params));
 });
 
 server.listen(4000, function () {
