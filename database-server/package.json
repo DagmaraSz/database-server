@@ -1,0 +1,27 @@
+{
+  "name": "database-server",
+  "version": "1.0.0",
+  "description": "A server that stores and returns key-value pairs from the query string ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DagmaraSz/database-server.git"
+  },
+  "author": "Dagmara Szkurlat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DagmaraSz/database-server/issues"
+  },
+  "homepage": "https://github.com/DagmaraSz/database-server#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "request": "^2.79.0"
+  }
+}
