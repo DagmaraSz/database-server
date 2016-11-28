@@ -1,6 +1,6 @@
 (function(exports){
   function Storage() {
-    this.params;
+    this.params = [];
   };
   exports.Storage = Storage;
 })(this);

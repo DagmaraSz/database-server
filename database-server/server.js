@@ -1,19 +1,30 @@
 var express = require('express');
 var server = express();
 
-var storage = require("./storage").Storage;
+var Storage = require("./storage").Storage;
+var store = new Storage();
 
 server.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
 server.get('/set', function (req, res) {
-  storage.params = req.query;
-  res.send('You set: ' + JSON.stringify(storage.params));
+  store.params.push(req.query);
+  res.send('You set: ' + JSON.stringify(store.params[store.params.length-1]));
 });
 
 server.get('/get', function (req, res){
-  res.send('The value of ' + req.query['key'] + ' is: ' + storage.params[req.query['key']]);
+  if(!req.query['key']){
+    res.send('Key not found.');
+  } else {
+    var pair = store.params.find(function(element){
+      if (Object.keys(element)[0] === req.query['key']){
+        var allMatchingPairs = Object.keys(element)
+        return allMatchingPairs[allMatchingPairs.length - 1];
+      }
+    });
+    res.send('The value of ' + req.query['key'] + ' is: ' + pair[req.query['key']]);
+  }
 });
 
 server.listen(4000, function () {
