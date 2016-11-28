@@ -1,7 +1,7 @@
 {
   "name": "database-server",
   "version": "1.0.0",
-  "description": "A server that stores and returns key-value pairs from the query string ",
+  "description": "A server that stores and returns key-value pairs from the query string",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
