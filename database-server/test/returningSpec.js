@@ -6,7 +6,7 @@ var expect = require('Chai').expect;
 var server = require('../server.js');
 
 
-describe('returning some key with some value', function(){
+describe('returning some stored key with some value', function(){
 
   before(function(done) {
     request.get('http://localhost:4000/set?animal=whale', function (res) {
@@ -21,18 +21,20 @@ describe('returning some key with some value', function(){
     });
   });
 
-  it('tells you if a key is undefined', function(){
+  it('returns the last value stored at the requested key', function(done){
+    request.get('http://localhost:4000/set?animal=monkey', function (res) {
+      request.get('http://localhost:4000/get?key=animal', function (err, res, body){
+        expect(res.body).to.include('monkey');
+        expect(res.body).to.not.include('whale');
+        done();
+      });
+    });
+  });
+
+  it('tells you if a key is undefined', function(done){
     request.get('http://localhost:4000/get?key=tree', function (err, res, body){
       expect(res.body).to.include('undefined');
       done();
     });
   });
-
-  it('tells you if a key is not given in the query string', function(){
-    request.get('http://localhost:4000/get', function (err, res, body){
-      expect(res.body).to.include('not specified');
-      done();
-    });
-  });
-
 });

@@ -15,12 +15,7 @@ server.get('/set', function (req, res) {
 });
 
 server.get('/get', function (req, res){
-  var key = req.query['key'];
-  if(key){
-    res.send('The value of ' + key + ' is: ' + store[key]);
-  } else {
-    res.send('Key not specified.');
-  }
+  res.send('The value of ' + req.query['key'] + ' is: ' + store[req.query['key']]);
 });
 
 server.listen(4000, function () {
