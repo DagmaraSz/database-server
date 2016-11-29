@@ -9,21 +9,17 @@ server.get('/', function (req, res) {
 });
 
 server.get('/set', function (req, res) {
-  store.params.push(req.query);
-  res.send('You set: ' + JSON.stringify(store.params[store.params.length-1]));
+  var key = Object.keys(req.query).pop()
+  store[key] = req.query[key];
+  res.send('You set: ' + key + ' to ' + store[key]);
 });
 
 server.get('/get', function (req, res){
-  if(!req.query['key']){
-    res.send('Key not found.');
+  var key = req.query['key'];
+  if(key){
+    res.send('The value of ' + key + ' is: ' + store[key]);
   } else {
-    var pair = store.params.find(function(element){
-      if (Object.keys(element)[0] === req.query['key']){
-        var allMatchingPairs = Object.keys(element)
-        return allMatchingPairs[allMatchingPairs.length - 1];
-      }
-    });
-    res.send('The value of ' + req.query['key'] + ' is: ' + pair[req.query['key']]);
+    res.send('Key not specified.');
   }
 });
 
